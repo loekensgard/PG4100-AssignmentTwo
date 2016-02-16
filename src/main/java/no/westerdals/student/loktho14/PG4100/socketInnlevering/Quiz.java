@@ -31,6 +31,24 @@ public class Quiz {
         answer = bok.get(n).getForfatter();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Quiz quiz = (Quiz) o;
+
+        return question.equals(quiz.question) && answer.equals(quiz.answer);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = question.hashCode();
+        result = 31 * result + answer.hashCode();
+        return result;
+    }
+
     public String getQuestion() {
         return question;
     }
@@ -39,9 +57,4 @@ public class Quiz {
         return answer;
     }
 
-    /*public static void main(String []args)throws SQLException{
-        Quiz q = new Quiz();
-        System.out.println(q.getQuestion());
-        System.out.println(q.getAnswer());
-    }*/
 }

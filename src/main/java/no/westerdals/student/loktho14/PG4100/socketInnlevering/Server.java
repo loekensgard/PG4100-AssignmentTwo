@@ -2,7 +2,6 @@ package no.westerdals.student.loktho14.PG4100.socketInnlevering;
 
 import java.net.*;
 import java.io.*;
-import java.sql.SQLException;
 
 public class Server extends Thread {
     private static boolean serverRunning = true;
@@ -40,7 +39,7 @@ public class Server extends Thread {
 
 
                 System.out.println(inputLine);
-                if (inputLine.toLowerCase().equals(quiz.getAnswer().toLowerCase())) {
+                if (StringChecker.check(inputLine, quiz.getAnswer())) {
                     out.writeUTF(CORRECT);
                 } else {
                     out.writeUTF(WRONG + "Riktig svar er: " + quiz.getAnswer());

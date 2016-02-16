@@ -16,8 +16,8 @@ public class DBhandlerBokliste {
     private Connection con;
     private final String TABELL_NAVN = "bokliste";
     private PreparedStatement psGetTabell;
-    private final String bruker = "root";
-    private final String passord = "9t09aras";
+    private final String bruker = ".....";
+    private final String passord = "........";
 
     public DBhandlerBokliste() throws SQLException {
         db = new ConnectToDB("localhost", "pg4100innlevering2", bruker, passord);
