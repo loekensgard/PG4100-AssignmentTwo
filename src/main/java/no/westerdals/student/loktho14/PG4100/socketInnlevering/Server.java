@@ -23,13 +23,16 @@ public class Server extends Thread {
 
     public void run(){
         try{
+
             out = new DataOutputStream(clientSocket.getOutputStream());
             in = new DataInputStream(clientSocket.getInputStream());
 
             out.writeUTF(START_QUESTION);
 
+
             while(true){
                 Quiz quiz = new Quiz("root","9t09aras");
+                if (in.readUTF().toLowerCase().equals("ja")) {
 
                 out.writeUTF("Hvem har skrevet boken: " + quiz.getQuestion());
                 String inputLine = in.readUTF();
@@ -42,8 +45,10 @@ public class Server extends Thread {
 
                 out.writeUTF(CONTINUE);
 
-                if (inputLine.toLowerCase().equals("nei")) {
+                } else if (in.readUTF().toLowerCase().equals("nei")) {
                     break;
+                } else {
+                    System.out.println("Du har nok skrevet noe feil.");
                 }
             }
 
