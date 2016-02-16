@@ -41,37 +41,24 @@ public class Client {
             System.exit(1);
         }
 
-        //stdIn = new BufferedReader(new InputStreamReader(System.in));
+
         String userInput;
-        while(clientRunning){
+        while (true) {
             System.out.println(in.readUTF());
-            if(SCANNER.hasNextLine()){
-                userInput = SCANNER.nextLine();
-                out.writeUTF(userInput);
-                if(userInput.toLowerCase().equals("nei")){
-                    clientRunning = false;
-                    break;
-                }
-
-            }
-
-        }
-
-        /*
-        stdIn = new BufferedReader(new InputStreamReader(System.in));
-        String userInput;
-
-        System.out.println("Skriv (\"Nei\") for å avslutte");
-        while ((userInput = stdIn.readLine()) != null) {
-            out.println(userInput);
-
-            // end loop
+            userInput = SCANNER.nextLine();
+            out.writeUTF(userInput);
+            out.flush();
             if (userInput.toLowerCase().equals("nei")) {
                 break;
             }
 
-            System.out.println("echo: " + in.readLine());
-        }*/
+            System.out.println(in.readUTF());
+            userInput = SCANNER.nextLine();
+            out.writeUTF(userInput);
+            out.flush();
+            System.out.println(in.readUTF());
+
+        }
 
         out.close();
         in.close();
