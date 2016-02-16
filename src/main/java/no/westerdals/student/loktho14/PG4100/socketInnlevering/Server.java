@@ -8,8 +8,8 @@ public class Server extends Thread {
     private static boolean serverRunning = true;
     private Socket clientSocket;
     private static final int PORT = 5555;
-    private PrintWriter out;
-    private BufferedReader in;
+    private DataOutputStream out;
+    private DataInputStream in;
     private final String START_QUESTION = "Velkommen til quiz vil du fortsette?(\"ja/nei\")";
     private final String CORRECT = "Det er riktig!\n";
     private final String WRONG = "Det er feil!\n";
@@ -23,24 +23,24 @@ public class Server extends Thread {
 
     public void run(){
         try{
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            out = new DataOutputStream(clientSocket.getOutputStream());
+            in = new DataInputStream(clientSocket.getInputStream());
 
-            out.println(START_QUESTION);
+            out.writeUTF(START_QUESTION);
 
             while(true){
                 Quiz quiz = new Quiz("root","9t09aras");
 
-                out.println("Hvem har skrevet boken: " + quiz.getQuestion());
-                String inputLine = in.readLine();
+                out.writeUTF("Hvem har skrevet boken: " + quiz.getQuestion());
+                String inputLine = in.readUTF();
 
                 if(inputLine.equals(quiz.getAnswer())){
-                    out.println(CORRECT);
+                    out.writeUTF(CORRECT);
                 }else{
-                    out.println(WRONG + "Riktig svar er: " + quiz.getAnswer());
+                    out.writeUTF(WRONG + "Riktig svar er: " + quiz.getAnswer());
                 }
 
-                out.println(CONTINUE);
+                out.writeUTF(CONTINUE);
 
                 if (inputLine.toLowerCase().equals("nei")) {
                     break;

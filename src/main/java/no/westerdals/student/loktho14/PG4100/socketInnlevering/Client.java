@@ -2,14 +2,18 @@ package no.westerdals.student.loktho14.PG4100.socketInnlevering;
 
 import java.io.*;
 import java.net.*;
+import java.util.Scanner;
 
 public class Client {
     private static String serverHost = "localhost";
-    private static PrintWriter out = null;
-    private static BufferedReader in = null;
+    //private static PrintWriter out = null;
+    //private static BufferedReader in = null;
+    //private static BufferedReader stdIn;
+    private static DataOutputStream out = null;
+    private static DataInputStream in = null;
     private static Socket socket = null;
-    private static BufferedReader stdIn;
     private static boolean clientRunning = true;
+    private static final Scanner SCANNER = new Scanner(System.in);
 
 
     public static void main(String[] args) throws IOException {
@@ -25,8 +29,10 @@ public class Client {
 
         try {
             socket = new Socket(serverHostname, 5555);
-            out = new PrintWriter(socket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            out = new DataOutputStream(socket.getOutputStream());
+            in = new DataInputStream(socket.getInputStream());
+            //out = new PrintWriter(socket.getOutputStream(), true);
+            //in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (UnknownHostException e) {
             System.err.println("Finner ikke hosten: " + serverHostname);
             System.exit(1);
@@ -35,12 +41,13 @@ public class Client {
             System.exit(1);
         }
 
-        stdIn = new BufferedReader(new InputStreamReader(System.in));
+        //stdIn = new BufferedReader(new InputStreamReader(System.in));
         String userInput;
         while(clientRunning){
-            if((userInput = stdIn.readLine()) != null){
-                out.println(userInput);
-                System.out.println("Server: " + in.readLine());
+            if(SCANNER.hasNextLine()){
+                userInput = SCANNER.nextLine();
+                out.writeUTF(userInput);
+                System.out.println("Server: " + in.readUTF());
                 if(userInput.toLowerCase().equals("nei")){
                     clientRunning = false;
                     break;
@@ -68,7 +75,6 @@ public class Client {
 
         out.close();
         in.close();
-        stdIn.close();
         socket.close();
     }
 }
