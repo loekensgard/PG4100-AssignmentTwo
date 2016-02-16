@@ -10,7 +10,7 @@ public class Server extends Thread {
     private static final int PORT = 5555;
     private DataOutputStream out;
     private DataInputStream in;
-    private final String START_QUESTION = "Velkommen til quiz vil du fortsette?(\"ja/nei\")";
+    private final String START_QUESTION = "Velkommen til quiz\nFor å fortsette kan du trykke hvilken som helst knapp\nDersom du ønsker å avslutte skriver du nei(\"Any/nei\")";
     private final String CORRECT = "Det er riktig!\n";
     private final String WRONG = "Det er feil!\n";
     private final String CONTINUE = "Vil du fortsette?(\"ja/nei\")";
@@ -23,33 +23,30 @@ public class Server extends Thread {
 
     public void run(){
         try{
-
+            System.out.println("Ny client er koblet til");
+            Quiz quiz = new Quiz("root", "9t09aras");
             out = new DataOutputStream(clientSocket.getOutputStream());
             in = new DataInputStream(clientSocket.getInputStream());
-
             out.writeUTF(START_QUESTION);
 
 
-            while(true){
-                Quiz quiz = new Quiz("root","9t09aras");
-                if (in.readUTF().toLowerCase().equals("ja")) {
+            while (true) {
+                out.writeUTF(quiz.getQuestion() + "  " + quiz.getAnswer());
+
+                if (in.readUTF().toLowerCase().equals("nei")) {
+                    break;
+                }
 
                 out.writeUTF("Hvem har skrevet boken: " + quiz.getQuestion());
                 String inputLine = in.readUTF();
-
-                if(inputLine.equals(quiz.getAnswer())){
+                String answer = quiz.getAnswer();
+                if (inputLine.toLowerCase().equals(answer.toLowerCase())) {
                     out.writeUTF(CORRECT);
-                }else{
+                } else {
                     out.writeUTF(WRONG + "Riktig svar er: " + quiz.getAnswer());
                 }
-
                 out.writeUTF(CONTINUE);
-
-                } else if (in.readUTF().toLowerCase().equals("nei")) {
-                    break;
-                } else {
-                    System.out.println("Du har nok skrevet noe feil.");
-                }
+                out.flush();
             }
 
         }catch (Exception e){

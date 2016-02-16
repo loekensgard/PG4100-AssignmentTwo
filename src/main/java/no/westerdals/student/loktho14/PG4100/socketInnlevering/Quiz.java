@@ -20,11 +20,10 @@ public class Quiz {
 
         //System.out.println(bok.size());
         //System.out.println(n);
-
         //bok.forEach(j -> System.out.println(j));
 
         setQuiz(n);
-
+        db.close();
     }
 
     public void setQuiz(int n) {
@@ -40,9 +39,8 @@ public class Quiz {
         return answer;
     }
 
-
-   /* public static void main(String []args)throws SQLException{
-        Quiz q = new Quiz("brukernavn","passord");
+    /*public static void main(String []args)throws SQLException{
+        Quiz q = new Quiz("root","9t09aras");
         System.out.println(q.getQuestion());
         System.out.println(q.getAnswer());
     }*/

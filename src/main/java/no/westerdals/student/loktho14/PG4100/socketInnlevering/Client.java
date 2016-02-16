@@ -44,10 +44,10 @@ public class Client {
         //stdIn = new BufferedReader(new InputStreamReader(System.in));
         String userInput;
         while(clientRunning){
+            System.out.println(in.readUTF());
             if(SCANNER.hasNextLine()){
                 userInput = SCANNER.nextLine();
                 out.writeUTF(userInput);
-                System.out.println("Server: " + in.readUTF());
                 if(userInput.toLowerCase().equals("nei")){
                     clientRunning = false;
                     break;
