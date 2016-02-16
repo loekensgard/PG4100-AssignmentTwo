@@ -6,13 +6,9 @@ import java.util.Scanner;
 
 public class Client {
     private static String serverHost = "localhost";
-    //private static PrintWriter out = null;
-    //private static BufferedReader in = null;
-    //private static BufferedReader stdIn;
     private static DataOutputStream out = null;
     private static DataInputStream in = null;
     private static Socket socket = null;
-    private static boolean clientRunning = true;
     private static final Scanner SCANNER = new Scanner(System.in);
 
 
@@ -31,8 +27,6 @@ public class Client {
             socket = new Socket(serverHostname, 5555);
             out = new DataOutputStream(socket.getOutputStream());
             in = new DataInputStream(socket.getInputStream());
-            //out = new PrintWriter(socket.getOutputStream(), true);
-            //in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (UnknownHostException e) {
             System.err.println("Finner ikke hosten: " + serverHostname);
             System.exit(1);

@@ -56,36 +56,6 @@ public class Server extends Thread {
             System.exit(1);
         }
 
-
-        /*System.out.println("Ny client er koblet til");
-        try {
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-            in = new BufferedReader(
-                    new InputStreamReader(clientSocket.getInputStream()));
-
-            String inputLine;
-
-            while ((inputLine = in.readLine()) != null) {
-                System.out.println("Server: " + inputLine);
-
-                if (inputLine.equals("?")) {
-                    inputLine = new String("\"Nei\" ends Client, ");
-                }
-                out.println(inputLine);
-                out.flush();
-
-                if (inputLine.toLowerCase().equals("nei")) {
-                    break;
-                }
-            }
-
-            out.close();
-            in.close();
-            clientSocket.close();
-        } catch (IOException e) {
-            System.err.println("Problem med sending av tekst");
-            System.exit(1);
-        }*/
     }
 
     public static void main(String[] args) throws IOException {
