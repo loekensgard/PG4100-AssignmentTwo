@@ -54,16 +54,11 @@ public class Server extends Thread {
         try {
             serverSocket = new ServerSocket(PORT);
             System.out.println("Socket er laget");
-            try {
                 while (serverRunning) {
                     new Server(serverSocket.accept());
                 }
-            } catch (IOException e) {
-                System.err.println("Klarte ikke ta imot client");
-                System.exit(1);
-            }
         } catch (IOException e) {
-            System.err.println("Kunne ikke lytte på port 5555");
+            System.err.println("Klarte ikke lytte på port " + PORT + " eller det var et problem med motagelsen av en klient");
             System.exit(1);
         } finally {
             try {
