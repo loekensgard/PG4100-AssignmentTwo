@@ -9,6 +9,7 @@ public class Client {
     private static BufferedReader in = null;
     private static Socket socket = null;
     private static BufferedReader stdIn;
+    private static boolean clientRunning = true;
 
 
     public static void main(String[] args) throws IOException {
@@ -36,6 +37,22 @@ public class Client {
 
         stdIn = new BufferedReader(new InputStreamReader(System.in));
         String userInput;
+        while(clientRunning){
+            if((userInput = stdIn.readLine()) != null){
+                out.println(userInput);
+                System.out.println("Server: " + in.readLine());
+                if(userInput.toLowerCase().equals("nei")){
+                    clientRunning = false;
+                    break;
+                }
+
+            }
+
+        }
+
+        /*
+        stdIn = new BufferedReader(new InputStreamReader(System.in));
+        String userInput;
 
         System.out.println("Skriv (\"Nei\") for å avslutte");
         while ((userInput = stdIn.readLine()) != null) {
@@ -47,7 +64,7 @@ public class Client {
             }
 
             System.out.println("echo: " + in.readLine());
-        }
+        }*/
 
         out.close();
         in.close();
