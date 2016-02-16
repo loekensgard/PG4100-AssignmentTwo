@@ -18,10 +18,10 @@ public class Quiz {
         bok = db.getTabell();
         int n = random.nextInt(bok.size());
 
-        System.out.println(bok.size());
-        System.out.println(n);
+        //System.out.println(bok.size());
+        //System.out.println(n);
 
-        bok.forEach(j -> System.out.println(j));
+        //bok.forEach(j -> System.out.println(j));
 
         setQuiz(n);
 
