@@ -69,19 +69,4 @@ public class Bok {
                 "Utgitt " + utgitt;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Bok bok = (Bok) o;
-
-        return isbn != null ? isbn.equals(bok.isbn) : bok.isbn == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        return isbn != null ? isbn.hashCode() : 0;
-    }
 }

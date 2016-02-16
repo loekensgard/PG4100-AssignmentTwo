@@ -13,8 +13,8 @@ public class Quiz {
     private ArrayList<Bok> bok = new ArrayList<>();
     private Random random = new Random();
 
-    public Quiz(String brukernavn, String passord) throws SQLException {
-        DBhandlerBokliste db = new DBhandlerBokliste(brukernavn, passord);
+    public Quiz() throws SQLException {
+        DBhandlerBokliste db = new DBhandlerBokliste();
         bok = db.getTabell();
         int n = random.nextInt(bok.size());
 
@@ -40,7 +40,7 @@ public class Quiz {
     }
 
     /*public static void main(String []args)throws SQLException{
-        Quiz q = new Quiz("root","9t09aras");
+        Quiz q = new Quiz();
         System.out.println(q.getQuestion());
         System.out.println(q.getAnswer());
     }*/

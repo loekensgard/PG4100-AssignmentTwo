@@ -24,29 +24,28 @@ public class Server extends Thread {
     public void run(){
         try{
             System.out.println("Ny client er koblet til");
-            Quiz quiz = new Quiz("root", "9t09aras");
             out = new DataOutputStream(clientSocket.getOutputStream());
             in = new DataInputStream(clientSocket.getInputStream());
             out.writeUTF(START_QUESTION);
 
 
             while (true) {
-                out.writeUTF(quiz.getQuestion() + "  " + quiz.getAnswer());
-
-                if (in.readUTF().toLowerCase().equals("nei")) {
-                    break;
-                }
-
+                Quiz quiz = new Quiz();
                 out.writeUTF("Hvem har skrevet boken: " + quiz.getQuestion());
+
                 String inputLine = in.readUTF();
-                String answer = quiz.getAnswer();
-                if (inputLine.toLowerCase().equals(answer.toLowerCase())) {
+
+                System.out.println(inputLine);
+                if (inputLine.toLowerCase().equals(quiz.getAnswer().toLowerCase())) {
                     out.writeUTF(CORRECT);
                 } else {
                     out.writeUTF(WRONG + "Riktig svar er: " + quiz.getAnswer());
                 }
                 out.writeUTF(CONTINUE);
-                out.flush();
+
+                if (in.readUTF().toLowerCase().equals("nei")) {
+                    break;
+                }
             }
 
         }catch (Exception e){
