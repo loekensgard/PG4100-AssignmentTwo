@@ -61,13 +61,12 @@ public class Bok {
 
     @Override
     public String toString() {
-        return "Bok{" +
-                "forfatter='" + forfatter + '\'' +
-                ", tittel='" + tittel + '\'' +
-                ", isbn='" + isbn + '\'' +
-                ", sider=" + sider +
-                ", utgitt=" + utgitt +
-                '}';
+
+        return "Forfatter: " + forfatter + " " +
+                "Tittel: " + tittel + " " +
+                "ISBN: " + isbn + " " +
+                "Sider: " + sider + " " +
+                "Utgitt " + utgitt;
     }
 
     @Override

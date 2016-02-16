@@ -10,33 +10,6 @@ public class Server extends Thread {
     private PrintWriter out;
     private BufferedReader in;
 
-    public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = null;
-
-        try {
-            serverSocket = new ServerSocket(PORT);
-            System.out.println("Socket er laget");
-            try {
-                while (serverRunning) {
-                    new Server(serverSocket.accept());
-                }
-            } catch (IOException e) {
-                System.err.println("Klarte ikke ta imot client");
-                System.exit(1);
-            }
-        } catch (IOException e) {
-            System.err.println("Kunne ikke lytte på port 5555");
-            System.exit(1);
-        } finally {
-            try {
-                System.out.println("Lukker connectionen");
-                serverSocket.close();
-            } catch (IOException e) {
-                System.err.println("Klarte ikke lukke port 5555.");
-                System.exit(1);
-            }
-        }
-    }
 
     private Server(Socket clientSoc) {
         clientSocket = clientSoc;
@@ -44,10 +17,7 @@ public class Server extends Thread {
     }
 
     public void run() {
-
         System.out.println("Ny client er koblet til");
-
-
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(
@@ -77,4 +47,33 @@ public class Server extends Thread {
             System.exit(1);
         }
     }
+
+    public static void main(String[] args) throws IOException {
+        ServerSocket serverSocket = null;
+
+        try {
+            serverSocket = new ServerSocket(PORT);
+            System.out.println("Socket er laget");
+            try {
+                while (serverRunning) {
+                    new Server(serverSocket.accept());
+                }
+            } catch (IOException e) {
+                System.err.println("Klarte ikke ta imot client");
+                System.exit(1);
+            }
+        } catch (IOException e) {
+            System.err.println("Kunne ikke lytte på port 5555");
+            System.exit(1);
+        } finally {
+            try {
+                System.out.println("Lukker connectionen");
+                serverSocket.close();
+            } catch (IOException e) {
+                System.err.println("Klarte ikke lukke port 5555.");
+                System.exit(1);
+            }
+        }
+    }
+
 }
