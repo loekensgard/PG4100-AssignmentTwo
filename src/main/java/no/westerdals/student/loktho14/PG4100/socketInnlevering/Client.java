@@ -51,6 +51,7 @@ public class Client {
             out.writeUTF(userInput);
             out.flush();
             System.out.println(in.readUTF());
+            System.out.println(in.readUTF());
 
         }
 

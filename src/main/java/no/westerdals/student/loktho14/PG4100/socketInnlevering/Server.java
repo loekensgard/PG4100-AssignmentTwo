@@ -13,6 +13,7 @@ public class Server extends Thread {
     private final String CORRECT = "Det er riktig!\n";
     private final String WRONG = "Det er feil!\n";
     private final String CONTINUE = "Vil du fortsette?(\"ja/nei\")";
+    private int score = 0;
 
 
     private Server(Socket clientSoc) {
@@ -41,9 +42,11 @@ public class Server extends Thread {
                 System.out.println(inputLine);
                 if (StringChecker.check(inputLine, quiz.getAnswer())) {
                     out.writeUTF(CORRECT);
+                    score++;
                 } else {
-                    out.writeUTF(WRONG + "Riktig svar er: " + quiz.getAnswer());
+                    out.writeUTF(WRONG + "Riktig svar er: " + quiz.getAnswer() + "\n");
                 }
+                out.writeUTF("Din score: " + score);
                 out.writeUTF(CONTINUE);
                 out.flush();
 
