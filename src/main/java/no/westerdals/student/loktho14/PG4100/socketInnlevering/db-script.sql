@@ -1,18 +1,14 @@
 
+--DROP DATABASE `pg4100innlevering2`;
+CREATE SCHEMA IF NOT EXISTS `pg4100innlevering2`;
 
-DROP DATABASE `pg4100innlevering2`;
-
-CREATE SCHEMA `pg4100innlevering2`;
-
-DROP TABLE `bokliste`;
-
+DROP TABLE IF EXISTS `bokliste`;
 CREATE TABLE `pg4100innlevering2`.`bokliste` (
   `forfatter` VARCHAR(25) NULL,
   `tittel` VARCHAR(25) NULL,
   `ISBN` VARCHAR(50) NULL,
   `sider` SMALLINT(4) NULL,
   `utgitt` SMALLINT(4) NULL);
-
 
 
 INSERT INTO `bokliste` (`forfatter`, `tittel`, `ISBN`, `sider`, `utgitt`) VALUES
