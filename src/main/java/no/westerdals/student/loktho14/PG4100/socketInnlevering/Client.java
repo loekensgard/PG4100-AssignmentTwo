@@ -16,10 +16,6 @@ public class Client {
 
         String serverHostname = serverHost;
 
-        if (args.length > 0) {
-            serverHostname = args[0];
-        }
-
         System.out.println("Prøver å koble til host " +
                 serverHostname + " on port 5555.");
 
