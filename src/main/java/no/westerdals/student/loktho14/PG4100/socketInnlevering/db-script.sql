@@ -1,5 +1,4 @@
-
---DROP DATABASE `pg4100innlevering2`;
+-- DROP DATABASE `pg4100innlevering2`;
 CREATE SCHEMA IF NOT EXISTS `pg4100innlevering2`;
 
 DROP TABLE IF EXISTS `bokliste`;

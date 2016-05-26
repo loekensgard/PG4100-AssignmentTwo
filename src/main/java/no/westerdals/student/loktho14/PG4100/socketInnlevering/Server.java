@@ -61,25 +61,15 @@ public class Server extends Thread {
     }
 
     public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = null;
-
-        try {
-            serverSocket = new ServerSocket(PORT);
+        try(ServerSocket serverSocket = new ServerSocket(PORT)) {
             System.out.println("Socket er laget");
                 while (serverRunning) {
                     new Server(serverSocket.accept());
                 }
+
         } catch (IOException e) {
             System.err.println("Klarte ikke lytte på port " + PORT + " eller det var et problem med motagelsen av en klient");
             System.exit(1);
-        } finally {
-            try {
-                System.out.println("Lukker connectionen");
-                serverSocket.close();
-            } catch (IOException e) {
-                System.err.println("Klarte ikke lukke port 5555.");
-                System.exit(1);
-            }
         }
     }
 
