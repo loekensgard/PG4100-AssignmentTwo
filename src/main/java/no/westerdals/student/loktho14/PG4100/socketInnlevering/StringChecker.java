@@ -6,6 +6,8 @@ package no.westerdals.student.loktho14.PG4100.socketInnlevering;
  */
 public class StringChecker {
 
+
+    //Method for checking answer agains users input.
     public static boolean check(String input, String answer) {
         input = input.toLowerCase();
         answer = answer.toLowerCase();
